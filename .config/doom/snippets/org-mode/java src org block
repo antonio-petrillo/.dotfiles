@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name:java src org block
+# key: <j
+# --
+
+#+begin_src java
+$0
+#+end_src

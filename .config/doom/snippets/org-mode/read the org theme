@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: read the org theme
+# key: <rto
+# --
+
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+#+OPTIONS: num:nil timestamp:nil toc:2

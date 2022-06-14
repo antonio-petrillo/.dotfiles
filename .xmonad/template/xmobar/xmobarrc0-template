@@ -1,0 +1,44 @@
+Config {
+  font = "xft:Tamzen:pixelsize=16:antialias=true:hinting=true"
+     , additionalFonts = [ "xft:Font Awesome 5 Free:pixelsize=9"
+                         , "xft:mononoki Nerd Font:pixelsize=12:antialias=true:hinting=true"
+                         , "xft:Font Awesome 5 Brands:pixelsize=9:antialias=true:hinting=true"]
+     , borderColor = "black"
+     , bgColor  = "BGCOLOR"
+     , fgColor  = "FGCOLOR"
+     , border = TopB
+     , alpha = 255
+     , position = Static {xpos = 0, ypos = 0, width = 1920, height = 32}    -- config for 1 monitor
+     , textOffset = -1
+     , iconOffset = -1
+     , lowerOnStart = False
+     , pickBroadest = False
+     , persistent = True
+     , hideOnStart = False
+     , allDesktops = True
+     , overrideRedirect = True
+     , commands = [ Run Cpu ["-t", "<fc=FGCOLOR><bar></fc>",
+                  "-f", ":",
+                  "-H", "75",
+                  "-L", "25",
+                  "-h", "COLOR1",
+                  "-n", "COLOR2",
+                  "-l", "COLOR3" ] 10
+                  ,Run Memory  [ "-t", "<fc=FGCOLOR><usedbar></fc>",
+                      "-f", ":",
+                      "-H", "75",
+                      "-L", "25",
+                      "-h", "COLOR1",
+                      "-n", "COLOR2",
+                      "-l", "COLOR3" ] 10
+                  , Run BatteryP ["BAT0"]
+                                ["-t", "<fc=FGCOLOR><fn=2>\xf581 </fn></fc>: <left>%", "-L", "10", "-H", "80", "-p", "3",
+                                 "--", "-O", "", "-i", "", "-L", "-15", "-H", "-5",
+                                 "-l", "red", "-m", "blue", "-h", "green" ] 600
+                  , Run Date "%a %b %d, %H:%M" "date" 10
+                  , Run UnsafeStdinReader
+                  ]
+     , sepChar = "%"
+     , alignSep = "}{"
+     , template = "<fc=COLOR3><fn=2> </fn></fc> <fc=COLOR3>|</fc> %UnsafeStdinReader% }{ Cpu: %cpu% Mem: %memory% %battery% %date% "
+     }
