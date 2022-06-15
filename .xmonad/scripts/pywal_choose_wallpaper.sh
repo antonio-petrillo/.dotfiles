@@ -10,4 +10,5 @@ then
     "$HOME"/.xmonad/scripts/xmobar_pywal_color_sync.sh
     xmonad --recompile
     xmonad --restart
+    betterlockscreen -u "$selected"
 fi

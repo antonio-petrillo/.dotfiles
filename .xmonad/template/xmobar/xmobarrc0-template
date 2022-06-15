@@ -8,7 +8,8 @@ Config {
      , fgColor  = "FGCOLOR"
      , border = TopB
      , alpha = 255
-     , position = Static {xpos = 0, ypos = 0, width = 1920, height = 32}    -- config for 1 monitor
+     , position = Static {xpos = 0, ypos = 0, width = 1366, height = 32}    -- config for 1 monitor full HD
+     -- , position = Static {xpos = 0, ypos = 0, width = 1920, height = 32}    -- config for 1 monitor X220
      , textOffset = -1
      , iconOffset = -1
      , lowerOnStart = False
