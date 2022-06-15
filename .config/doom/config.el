@@ -86,9 +86,13 @@
   (kbd "; e") 'epa-dired-do-encrypt)
 
 ;; chage font
-(setq doom-font (font-spec :family "Victor Mono Nerd Font" :size 15)
-      doom-big-font (font-spec :family "Victor Mono Nerd Font" :size 24)
-      doom-variable-pitch-font (font-spec :family "Victor Mono Nerd Font" :size 15))
+;; (setq doom-font (font-spec :family "Victor Mono Nerd Font" :size 15)
+;;       doom-big-font (font-spec :family "Victor Mono Nerd Font" :size 24)
+;;       doom-variable-pitch-font (font-spec :family "Victor Mono Nerd Font" :size 15))
+
+(setq doom-font (font-spec :family "Terminus" :style "Regular" :size 24)
+      doom-big-font (font-spec :family "Terminus" :size 36)
+      doom-variable-pitch-font (font-spec :family "Terminus" :size 24))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t

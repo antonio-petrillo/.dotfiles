@@ -1,4 +1,4 @@
--- SEE https://xmonad.org/TUTORIAL.html
+-- See https://xmonad.org/TUTORIAL.html
 import XMonad
 
 import XMonad.Hooks.DynamicLog

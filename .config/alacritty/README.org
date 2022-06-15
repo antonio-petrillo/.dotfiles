@@ -1,0 +1,8 @@
+#+title: Readme
+
+* Just a basic config
+The most part is stolen from [[Distro Tube][Distro Tube]], I just removed the theming section because I use pywal.
+To use pywal colorscheme, as it written in [[https://github.com/dylanaraps/pywal/wiki/Getting-Started][github wiki]], I only need to add the following line to my ~bashrc~:
+#+begin_src shell
+(cat ~/.cache/wal/sequences &)
+#+end_src

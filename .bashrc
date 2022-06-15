@@ -11,6 +11,7 @@ PS1='[\u@\h \W]\$ '
 
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.config/emacs/bin"
+# remember to generate ssh key for github
 eval $(keychain --eval --quiet ~/.ssh/github)
 . "$HOME/.cargo/env"
 

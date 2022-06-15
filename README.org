@@ -2,4 +2,27 @@
 #+TITLE: Readme
 
 * My dotfiles
-This is just a first draft
+What is in there:
++ Xmonad & Xmobar config
++ dunst
++ alacritty
++ pywal
++ picom
++ tmux
++ .bashrc
++ rofi
++ some wallpaper
++ Emacs (Doom)
+* TODO In order of importance
+1. add pacman hook to autorecompile xmonad, so I don't need to bestemmiare
+2. add a file description, and a script, for every symlink to automate the creation of correct symlink (the one that are there now are just placeholder)
+3. Setup rofi to use pywal colorscheme
+4. Improve xmonad literate config and xmobar config
+5. Add Doom literate config
+6. Add Install script (only to install needed package)
+7. Add files to gitignore
+8. Add script to change wallpaper and sync all colorscheme accordingly to pywal
+9. eww widget (notif-center, dashboard, systray (there are some alternative to use with xmobar,  but I didn't really like them (this todo is kinda lispy (but in reverse))))
+10. Explain why I think that ~awesomeWM~ is better, but is to complicated to setup and that bring me back to XMonad (long story short: "Too much code to write, to much depencies (Bling, Rubato, Lain, ecc... )")
+11. Rewrite my own emacs config (a very basic config, to alternate with Doom)
+12. Try out NixOs

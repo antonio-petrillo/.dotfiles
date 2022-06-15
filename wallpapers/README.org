@@ -1,0 +1,5 @@
+#+title: Readme
+
+* Just a wallpaper collection
+* TODO Script
++ [ ] Add a script to choose a wallpaper and interact with pywal.

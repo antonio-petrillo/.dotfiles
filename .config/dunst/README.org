@@ -1,0 +1,7 @@
+#+title: Readme
+
+* How to setup
+Create a proper symlink to pywal output:
+#+begin_src shell
+ln -s "$HOME"/.cachec/wal/dunstrc "$HOME"/.config/dunst/dunstrc
+#+end_src

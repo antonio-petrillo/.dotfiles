@@ -159,7 +159,7 @@ myScratchpad =[ NS "dropdown"     spawnTerm              findTerm             ma
           spawnHtop              = myTerminal ++ " -t htop_term -e htop"
           findHtop               = title =? "htop_term"
           manageHtop             = doCenterFloat
-          spawnTerm              = myTerminal ++ " -t dropdown -e tmux "
+          spawnTerm              = myTerminal ++ " -t dropdown" -- -e tmux "
           findTerm               = title =? "dropdown"
           manageTerm             = doCenterFloat
           officeLaunchCalculator = "qalculate-gtk"
@@ -207,7 +207,7 @@ myAdditionalKeys = [ -- Basic keybindings
                    , ("M-f"         , sendMessage $ Toggle FULL)
                    , ("M-S-f"       , sendMessage (T.Toggle "floats"))
                    , ("M-S-x"       , io (exitWith ExitSuccess))
-                   , ("M-x"         , spawn $ "killall xmobar; xmonad --recompile; xmonad --restart")
+                   , ("M-x"         , spawn $ "killall xmobar; ~/.xmonad/scripts/xmobar_pywal_color_sync.sh; xmonad --recompile; xmonad --restart")
                    , ("M-<Esc>"     , spawn $ "xkill")
 
                    -- Layout shortcut

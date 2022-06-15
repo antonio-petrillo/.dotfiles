@@ -1,8 +1,17 @@
 #+title: Xmonad
 
 * My Xmonad configuration
-intro, ecc....
+Remember to redefine the alias in ~.xmonad/lib/Color.hs~!
+Use ~ln -s $HOME/.cache/wal/colors.hs $HOME/.xmonad/lib/Colors.hs~
+Dotfiles for my Xmonad configuration, it include:
++ Pywal colorscheme
++ Xmobar integration (it also include pywal configuration)
++ Gridselect (need improvment)
++ EWMH (support fullscreen for application, like a youtube video)
++ Scratchpad
++ EZconfig for keybindings
 * Import
+Just all the libraries needed to compile Xmonad.
 #+begin_src haskell :tangle xmonad.hs
 import XMonad hiding ((|||))
 import System.IO
@@ -57,7 +66,9 @@ import Data.Maybe (isJust, fromJust)
 import XMonad.Actions.GridSelect
 #+end_src
 * Variable definition
+All the parameter needed to customize Xmonad.
 ** Default app
+Default application that I use, could be improved.
 #+begin_src haskell :tangle xmonad.hs
 myTerminal         = "alacritty"
 myFallbackTerminal = "cool-retro-term"
@@ -68,6 +79,7 @@ myEditor           = "emacsclient -c -a \"emacs\""
 
 #+end_src
 ** Xmonad Variables
+Variable to customize some Xmonad behaviour.
 #+begin_src haskell :tangle xmonad.hs
 myBorderWidth   = 2
 myGaps          = 4
@@ -96,7 +108,10 @@ myTabTheme = def { fontName            = myFont
                  }
 
 #+end_src
-** Gridselect
+** TODO Gridselect
+GridSelect definition, need improvment:
+1. [ ] customize theme throw pywal
+2. [ ] define better system & app grid
 #+begin_src haskell :tangle xmonad.hs
 myColorizer = colorRangeFromClassName
               (0x2e,0x34,0x40) -- lowest  inactive bg #2e3440
@@ -167,7 +182,10 @@ myAppGrid = [ ("Emacs", "emacsclient -c -a emacs")
                  ]
 
 #+end_src
-** Scratchpad
+** TODO Scratchpad
+Some useful scratchpad (dropdown application), need improvment:
+1. [ ] add browser scratchpad
+2. [ ] improve htop scratchpad
 #+begin_src haskell :tangle xmonad.hs
 myScratchpad =[ NS "dropdown"     spawnTerm              findTerm             manageTerm,
                 NS "sys_monitor"  spawnHtop              findHtop             manageHtop,
@@ -177,7 +195,7 @@ myScratchpad =[ NS "dropdown"     spawnTerm              findTerm             ma
           spawnHtop              = myTerminal ++ " -t htop_term -e htop"
           findHtop               = title =? "htop_term"
           manageHtop             = doCenterFloat
-          spawnTerm              = myTerminal ++ " -t dropdown -e tmux "
+          spawnTerm              = myTerminal ++ " -t dropdown" -- -e tmux "
           findTerm               = title =? "dropdown"
           manageTerm             = doCenterFloat
           officeLaunchCalculator = "qalculate-gtk"
@@ -190,7 +208,9 @@ myScratchpad =[ NS "dropdown"     spawnTerm              findTerm             ma
 --              l = 0.95 - w
 
 #+end_src
-* Keybindings
+* TODO Keybindings
+One of the core section of this configuration.
++ [ ] add org table with keybindings
 #+begin_src haskell :tangle xmonad.hs
 myKeys conf@(XConfig {XMonad.modMask = modKey}) = M.fromList $
     [((m .|. modKey, k), windows $ f i)
@@ -228,7 +248,7 @@ myAdditionalKeys = [ -- Basic keybindings
                    , ("M-f"         , sendMessage $ Toggle FULL)
                    , ("M-S-f"       , sendMessage (T.Toggle "floats"))
                    , ("M-S-x"       , io (exitWith ExitSuccess))
-                   , ("M-x"         , spawn $ "killall xmobar; xmonad --recompile; xmonad --restart")
+                   , ("M-x"         , spawn $ "killall xmobar; ~/.xmonad/scripts/xmobar_pywal_color_sync.sh; xmonad --recompile; xmonad --restart")
                    , ("M-<Esc>"     , spawn $ "xkill")
 
                    -- Layout shortcut
@@ -254,6 +274,7 @@ myAdditionalKeys = [ -- Basic keybindings
 
 #+end_src
 * Mouse bindings
+This section could be expanded
 #+begin_src haskell :tangle xmonad.hs
 myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask, button1), (\w -> focus w >> mouseMoveWindow w))
@@ -263,6 +284,7 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 #+end_src
 * Layout
+Layout definition, usually I only use tall and tab layout, but sometime accordion and spiral come in handy.
 #+begin_src haskell :tangle xmonad.hs
 myLayout = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts floats
            $ mkToggle (NOBORDERS ?? FULL ?? EOT) myDefaultLayout
@@ -295,6 +317,8 @@ floats = renamed [Replace "floats"]
 
 #+end_src
 * Manage Hook
+Rule to apply on new spawned app, very basic configuration.
+Here I can, for example, specify to always open /Gimp/ on /workspace 3/
 #+begin_src haskell :tangle xmonad.hs
 myManageHook = composeAll . concat $
     [ [className =? "MPlayer"             --> doFloat]
@@ -304,11 +328,13 @@ myManageHook = composeAll . concat $
 
 #+end_src
 * Log Hook
+Honestly I don't remeber what log hook do 😅.
 #+begin_src haskell :tangle xmonad.hs
 myLogHook = return ()
 
 #+end_src
 * Startup hook
+Autostart app, can be changed to call an autostart script.
 #+begin_src haskell :tangle xmonad.hs
 myStartupHook = do
     -- spawnOnce "~/.xmonad/scripts/autostart.sh"
@@ -322,6 +348,7 @@ myStartupHook = do
 #+end_src
 * Main
 ** Configuration
+Just assemble all the piece seen before.
 #+begin_src haskell :tangle xmonad.hs
 myConfig = defaultConfig {
         terminal           = myTerminal,
@@ -343,6 +370,9 @@ myConfig = defaultConfig {
 
 #+end_src
 ** Xmobar utilities
+Utilities for Xmobar, includes:
+1. Count the number of windows open in a specific workspace
+2. Clickable workspace (i.e. click on the bar to change workspace)
 #+begin_src haskell :tangle xmonad.hs
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
     where i = fromJust $ M.lookup ws myWorkspaceIndices
@@ -352,6 +382,7 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 #+end_src
 ** Main
+Setup the window manager, launch xmobar ans specify color for bar workspaces (generated by pywal)
 #+begin_src haskell :tangle xmonad.hs
 main = do
   xmproc0 <- spawnPipe $ "xmobar ~/.xmonad/xmobar/xmobarrc0"
@@ -373,3 +404,174 @@ main = do
                            }
     } `additionalKeysP` myAdditionalKeys
 #+end_src
+* Xmobar template
+Unfortunely I am to lazy to rewrite this two configuration in haskell, mainly to use the colorscheme generated by pywal.
+So I use this template and generate a proper config file with a script, see this article by [[https://dev.to/mafflerbach/colortheme-switching-with-pywall-for-xmonad-and-xmobar-224l][mafflerbach]] for a proper explanation.
+My script is identical, the only difference is that I use ~awk~ instead of ~yq~.
+I don't have included a system tray, like trayer, because I don't like the integration with Xmobar, it's too hacky, my plan are to add a system tray in widget made with [[https://github.com/elkowar/eww][eww]].
+The bar is a little bit incosisten, but it's a good starting point.
+** Screen 0
+#+begin_src haskell :tangle ./template/xmobar/xmobarrc0-template
+Config {
+  font = "xft:Tamzen:pixelsize=16:antialias=true:hinting=true"
+     , additionalFonts = [ "xft:Font Awesome 5 Free:pixelsize=9"
+                         , "xft:mononoki Nerd Font:pixelsize=12:antialias=true:hinting=true"
+                         , "xft:Font Awesome 5 Brands:pixelsize=9:antialias=true:hinting=true"]
+     , borderColor = "black"
+     , bgColor  = "BGCOLOR"
+     , fgColor  = "FGCOLOR"
+     , border = TopB
+     , alpha = 255
+     , position = Static {xpos = 0, ypos = 0, width = 1920, height = 32}    -- config for 1 monitor
+     , textOffset = -1
+     , iconOffset = -1
+     , lowerOnStart = False
+     , pickBroadest = False
+     , persistent = True
+     , hideOnStart = False
+     , allDesktops = True
+     , overrideRedirect = True
+     , commands = [ Run Cpu ["-t", "<fc=FGCOLOR><bar></fc>",
+                  "-f", ":",
+                  "-H", "75",
+                  "-L", "25",
+                  "-h", "COLOR1",
+                  "-n", "COLOR2",
+                  "-l", "COLOR3" ] 10
+                  ,Run Memory  [ "-t", "<fc=FGCOLOR><usedbar></fc>",
+                      "-f", ":",
+                      "-H", "75",
+                      "-L", "25",
+                      "-h", "COLOR1",
+                      "-n", "COLOR2",
+                      "-l", "COLOR3" ] 10
+                  , Run BatteryP ["BAT0"]
+                                ["-t", "<fc=FGCOLOR><fn=2>\xf581 </fn></fc>: <left>%", "-L", "10", "-H", "80", "-p", "3",
+                                 "--", "-O", "", "-i", "", "-L", "-15", "-H", "-5",
+                                 "-l", "red", "-m", "blue", "-h", "green" ] 600
+                  , Run Date "%a %b %d, %H:%M" "date" 10
+                  , Run UnsafeStdinReader
+                  ]
+     , sepChar = "%"
+     , alignSep = "}{"
+     , template = "<fc=COLOR3><fn=2> </fn></fc> <fc=COLOR3>|</fc> %UnsafeStdinReader% }{ Cpu: %cpu% Mem: %memory% %battery% %date% "
+     }
+#+end_src
+**  Screen 1
+#+begin_src haskell :tangle ./template/xmobar/xmobarrc1-template
+Config {
+  -- font = "xft:Fira Code Nerd Font:pixelsize=12:antialias=true:hinting=true"
+  font = "xft:Tamzen:pixelsize=16:antialias=true:hinting=true"
+     , additionalFonts = [ "xft:Font Awesome 5 Free:pixelsize=9"
+                         , "xft:mononoki Nerd Font:pixelsize=12:antialias=true:hinting=true"
+                         , "xft:Font Awesome 5 Brands:pixelsize=9:antialias=true:hinting=true"]
+     , borderColor = "black"
+     , border = TopB
+     , bgColor  = "BGCOLOR"
+     , fgColor  = "FGCOLOR"
+     , alpha = 255
+     , position = Static {xpos = 1920, ypos = 0, width = 1920, height = 32} -- config for 2 monitor
+     , textOffset = -1
+     , iconOffset = -1
+     , lowerOnStart = False
+     , pickBroadest = False
+     , persistent = True
+     , hideOnStart = False
+     , allDesktops = True
+     , overrideRedirect = True
+     , commands = [ Run Cpu ["-t", "<fc=FGCOLOR><bar></fc>",
+                  "-f", ":",
+                  "-H", "75",
+                  "-L", "25",
+                  "-h", "COLOR1",
+                  "-n", "COLOR2",
+                  "-l", "COLOR3" ] 10
+                  ,Run Memory  [ "-t", "<fc=FGCOLOR><usedbar></fc>",
+                      "-f", ":",
+                      "-H", "75",
+                      "-L", "25",
+                      "-h", "COLOR1",
+                      "-n", "COLOR2",
+                      "-l", "COLOR3" ] 10
+                  , Run BatteryP ["BAT0"]
+                                ["-t", "<fc=FGCOLOR><fn=2>\xf581 </fn></fc>: <left>%", "-L", "10", "-H", "80", "-p", "3",
+                                 "--", "-O", "", "-i", "", "-L", "-15", "-H", "-5",
+                                 "-l", "red", "-m", "blue", "-h", "green" ] 600
+                  , Run Date "%a %b %d, %H:%M" "date" 10
+                  , Run UnsafeStdinReader
+                  ]
+     , sepChar = "%"
+     , alignSep = "}{"
+     , template = "<fc=COLOR3><fn=2> </fn></fc> <fc=COLOR3>|</fc> %UnsafeStdinReader% }{ Cpu: %cpu% Mem: %memory% %date% "
+     }
+
+#+end_src
+** Script
+#+begin_src shell :tangle ./scripts/xmobar_pywal_color_sync.sh
+#!/usr/bin/env bash
+
+input="$HOME/.xmonad/lib/Colors.hs"
+
+background=$(awk -F'=' '$1 == "background"{print $2}' $input | sed 's/"//g')
+foreground=$(awk -F'=' '$1 == "foreground"{print $2}' $input | sed 's/"//g')
+
+color0=$(awk -F'=' '$1 == "color0"{print $2}' $input | sed 's/"//g')
+color1=$(awk -F'=' '$1 == "color1"{print $2}' $input | sed 's/"//g')
+color2=$(awk -F'=' '$1 == "color2"{print $2}' $input | sed 's/"//g')
+color3=$(awk -F'=' '$1 == "color3"{print $2}' $input | sed 's/"//g')
+color4=$(awk -F'=' '$1 == "color4"{print $2}' $input | sed 's/"//g')
+color5=$(awk -F'=' '$1 == "color5"{print $2}' $input | sed 's/"//g')
+color6=$(awk -F'=' '$1 == "color6"{print $2}' $input | sed 's/"//g')
+color7=$(awk -F'=' '$1 == "color7"{print $2}' $input | sed 's/"//g')
+color8=$(awk -F'=' '$1 == "color8"{print $2}' $input | sed 's/"//g')
+color9=$(awk -F'=' '$1 == "color9"{print $2}' $input | sed 's/"//g')
+color10=$(awk -F'=' '$1 == "color10"{print $2}' $input | sed 's/"//g')
+color11=$(awk -F'=' '$1 == "color11"{print $2}' $input | sed 's/"//g')
+color12=$(awk -F'=' '$1 == "color12"{print $2}' $input | sed 's/"//g')
+color13=$(awk -F'=' '$1 == "color13"{print $2}' $input | sed 's/"//g')
+color14=$(awk -F'=' '$1 == "color14"{print $2}' $input | sed 's/"//g')
+color15=$(awk -F'=' '$1 == "color15"{print $2}' $input | sed 's/"//g')
+
+sed -e "s/BGCOLOR/$background/g" \
+    -e "s/FGCOLOR/$foreground/g" \
+    -e "s/COLOR1/$color1/g" \
+    -e "s/COLOR2/$color2/g" \
+    -e "s/COLOR3/$color3/g" \
+    -e "s/COLOR4/$color4/g" \
+    -e "s/COLOR5/$color5/g" \
+    -e "s/COLOR6/$color6/g" \
+    -e "s/COLOR7/$color7/g" \
+    -e "s/COLOR8/$color8/g" \
+    -e "s/COLOR9/$color9/g" \
+    -e "s/COLOR10/$color10/g" \
+    -e "s/COLOR11/$color11/g" \
+    -e "s/COLOR12/$color12/g" \
+    -e "s/COLOR13/$color13/g" \
+    -e "s/COLOR14/$color14/g" \
+    -e "s/COLOR15/$color15/g" \
+    "$HOME"/.xmonad/template/xmobar/xmobarrc1-template > "$HOME"/.xmonad/xmobar/xmobarrc1
+
+
+sed -e "s/BGCOLOR/$background/g" \
+    -e "s/FGCOLOR/$foreground/g" \
+    -e "s/COLOR1/$color1/g" \
+    -e "s/COLOR2/$color2/g" \
+    -e "s/COLOR3/$color3/g" \
+    -e "s/COLOR4/$color4/g" \
+    -e "s/COLOR5/$color5/g" \
+    -e "s/COLOR6/$color6/g" \
+    -e "s/COLOR7/$color7/g" \
+    -e "s/COLOR8/$color8/g" \
+    -e "s/COLOR9/$color9/g" \
+    -e "s/COLOR10/$color10/g" \
+    -e "s/COLOR11/$color11/g" \
+    -e "s/COLOR12/$color12/g" \
+    -e "s/COLOR13/$color13/g" \
+    -e "s/COLOR14/$color14/g" \
+    -e "s/COLOR15/$color15/g" \
+    "$HOME"/.xmonad/template/xmobar/xmobarrc0-template > "$HOME"/.xmonad/xmobar/xmobarrc0
+
+#+end_src
+* Thanks to
++ [[https://github.com/andrei-lus/dotfiles][andrei-lus]] for the bar inspiration.
++ [[https://gitlab.com/dwt1/dotfiles/-/tree/master/.xmonad][Distro Tube]] for the amazing Xmonad config (from wich I may have stole something) and also for the tons of tutorial he did on this window manager.

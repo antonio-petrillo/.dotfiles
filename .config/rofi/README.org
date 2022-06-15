@@ -1,0 +1,8 @@
+#+title: Readme
+
+* Rofi config
+Stolen from [[https://github.com/catppuccin/rofi][catppuccin]], I just removed their theme and added:
+#+begin_export ascii
+@import "~/.cache/wal/colors-rofi-dark"
+//@import "~/.cache/wal/colors-rofi-light"
+#+end_export

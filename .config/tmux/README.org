@@ -1,0 +1,4 @@
+#+title: Readme
+
+* Tmux config
+Just a simple config, the main purpouse of this config is to change the prefix from ~C-b~ to ~C-a~.

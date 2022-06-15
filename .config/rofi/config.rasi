@@ -1,7 +1,8 @@
 configuration{
     modi: "run,drun,window";
     lines: 5;
-    font: "Victor Mono Nerd Font 14";
+    //font: "Victor Mono Nerd Font 14";
+    font: "Tamzen 18";
     show-icons: true;
     icon-theme: "Oranchelo";
     terminal: "st";
@@ -16,7 +17,8 @@ configuration{
     sidebar-mode: true;
 }
 
-@theme "one-dark"
+@import "~/.cache/wal/colors-rofi-dark"
+//@import "~/.cache/wal/colors-rofi-light"
 
 element-text, element-icon , mode-switcher {
     background-color: inherit;
