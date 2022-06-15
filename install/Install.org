@@ -1,0 +1,56 @@
+#+title: Install
+
+* Package to install
+Install needed package, I use yay, but you can change it to your liking.
+#+begin_src shell :tangle install.sh
+yay -S  \
+acpi \
+lxappearance \
+colloid-gtk-theme-git \
+colloid-icon-theme-git \
+cool-retro-term \
+nemo \
+nemo-fileroller \
+htop \
+flameshot \
+neofetch \
+xmonad \
+xmonad-utils \
+xmonad-contrib \
+xmonad-recompile-pacman-hook-git \
+xmobar \
+emacs \
+ripgrep \
+fd \
+git \
+neovim \
+tamzen-font \
+nerd-fonts-jetbrains-mono \
+nerd-fonts-fira-code \
+nerd-fonts-roboto-mono \
+nerd-fonts-victor-mono \
+nerd-fonts-mononoki \
+terminus-font \
+ttf-font-awesome \
+ttf-icomoon-feather \
+ttf-iosevka-nerd \
+alacritty \
+feh \
+sxiv \
+papirus-icon-theme \
+pavucontrol \
+picom-ibhagwan-git \
+polkit-gnome \
+pywal-git \
+rofi \
+tmux \
+xdotool \
+redshift \
+qt5ct \
+stow \
+--needed
+#+end_src
+* Setup
+#+begin_src shell :tangle install.sh
+# git submodule init # clone doom emacs
+#+end_src
