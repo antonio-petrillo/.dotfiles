@@ -352,6 +352,7 @@ myStartupHook = do
     -- spawnOnce "~/.xmonad/scripts/autostart.sh"
     spawnOnce $ "feh --bg-scale " ++ wallpaper
     spawnOnce $ "setxkbmap us -option caps:ctrl_modifier"
+    spawnOnce $ "xsetroot -cursor_name left_ptr"
     spawnOnce "killall picom" -- kill current picom on each restart
     spawnOnce $ "picom --configuration ~/.dotfiles/.xmonad/picom.conf"
     spawnOnce $ "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 && eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)"
