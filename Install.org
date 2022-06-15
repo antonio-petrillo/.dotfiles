@@ -21,6 +21,8 @@ nerd-fonts-victor-mono
 nerd-fonts-mononoki
 terminus-font
 alacritty
+feh
+sxiv
 #+end_export
 * TODO Instruction
 ...

@@ -206,6 +206,7 @@ myAdditionalKeys = [ -- Basic keybindings
                    , ("M-S-."       , nextScreen)
                    , ("M-f"         , sendMessage $ Toggle FULL)
                    , ("M-S-f"       , sendMessage (T.Toggle "floats"))
+                   , ("M-C-t"       , spawn $ "~/.xmonad/scripts/pywal_choose_wallpaper.sh") -- change theme
                    , ("M-S-x"       , io (exitWith ExitSuccess))
                    , ("M-x"         , spawn $ "killall xmobar; ~/.xmonad/scripts/xmobar_pywal_color_sync.sh; xmonad --recompile; xmonad --restart")
                    , ("M-<Esc>"     , spawn $ "xkill")
@@ -270,6 +271,7 @@ myManageHook = composeAll . concat $
     [ [className =? "MPlayer"             --> doFloat]
     , [className =? "Gimp"                --> doFloat]
     , [className =? "guake"               --> doFloat]
+    , [className =? "Sxiv"               --> doCenterFloat]
     , [resource  =? "desktop_window"      --> doIgnore] ]
 
 myLogHook = return ()
