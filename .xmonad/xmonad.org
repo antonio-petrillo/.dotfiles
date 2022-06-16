@@ -351,6 +351,7 @@ Autostart app, can be changed to call an autostart script.
 myStartupHook = do
     -- spawnOnce "~/.xmonad/scripts/autostart.sh"
     spawnOnce $ "feh --bg-scale " ++ wallpaper
+    spawnOnce $ "~/.xmonad/scripts/check_battery.sh"
     spawnOnce $ "setxkbmap us -option caps:ctrl_modifier"
     spawnOnce $ "xsetroot -cursor_name left_ptr"
     spawnOnce "killall picom" -- kill current picom on each restart
@@ -436,6 +437,7 @@ Config {
      , border = TopB
      , alpha = 255
      , position = Static {xpos = 0, ypos = 0, width = 1920, height = 32}    -- config for 1 monitor
+     --, position = Static {xpos = 0, ypos = 0, width = 1366, height = 32}    -- config for 1 monitor X220
      , textOffset = -1
      , iconOffset = -1
      , lowerOnStart = False
@@ -459,7 +461,7 @@ Config {
                       "-n", "COLOR2",
                       "-l", "COLOR3" ] 10
                   , Run BatteryP ["BAT0"]
-                                ["-t", "<fc=FGCOLOR><fn=2>\xf581 </fn></fc>: <left>%", "-L", "10", "-H", "80", "-p", "3",
+                                ["-t", "<fc=FGCOLOR><fn=2>\xf581 </fn></fc>:<left>% ", "-L", "10", "-H", "80", "-p", "3",
                                  "--", "-O", "", "-i", "", "-L", "-15", "-H", "-5",
                                  "-l", "red", "-m", "blue", "-h", "green" ] 600
                   , Run Date "%a %b %d, %H:%M" "date" 10
@@ -484,6 +486,7 @@ Config {
      , fgColor  = "FGCOLOR"
      , alpha = 255
      , position = Static {xpos = 1920, ypos = 0, width = 1920, height = 32} -- config for 2 monitor
+     --, position = Static {xpos = 1366, ypos = 0, width = 1366, height = 32} -- config for 2 monitor X220
      , textOffset = -1
      , iconOffset = -1
      , lowerOnStart = False
@@ -520,7 +523,7 @@ Config {
 
 #+end_src
 ** Script
-#+begin_src shell :tangle ./scripts/xmobar_pywal_color_sync.sh
+#+begin_src shell
 #!/usr/bin/env bash
 
 input="$HOME/.xmonad/lib/Colors.hs"

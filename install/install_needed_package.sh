@@ -1,8 +1,3 @@
-#+title: Install
-
-* Package to install
-Install needed package, I use yay, but you can change it to your liking.
-#+begin_src shell :tangle install_needed_package.sh
 yay -S  \
 acpi \
 lxappearance \
@@ -50,21 +45,3 @@ qt5ct \
 stow \
 xorg-xsetroot \
 --needed
-#+end_src
-* Setup
-
-#+begin_src shell :tangle setup.sh
-# put config file in the right place
-stow -d "$HOME"/.dotfiles -t "$HOME"
-
-git clone https://github.com/doomemacs/doomemacs "$HOME"/.config/emacs
-"$HOME"/.config/emacs/bin/doom install
-
-# run pywal one time to generate cache file
-wal -i $(ls -1 "$HOME"/.dotfiles/wallpapers/ | shuf | head -1)
-
-# fix symlink
-ln -fs "$HOME"/.cache/wal/dunstrc "$HOME"/.config/dunst/dunstrc
-ln -fs "$HOME"/.cache/wal/colors.hs "$HOME"/.xmonad/lib/Colors.hs
-
-#+end_src

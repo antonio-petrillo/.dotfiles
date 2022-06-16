@@ -9,8 +9,8 @@ Config {
      , bgColor  = "BGCOLOR"
      , fgColor  = "FGCOLOR"
      , alpha = 255
-     , position = Static {xpos = 1920, ypos = 0, width = 1920, height = 32} -- config for 2 monitor full HD
-     -- , position = Static {xpos = 1366, ypos = 0, width = 1366, height = 32} -- config for 2 monitor (X220)
+     , position = Static {xpos = 1920, ypos = 0, width = 1920, height = 32} -- config for 2 monitor
+     --, position = Static {xpos = 1366, ypos = 0, width = 1366, height = 32} -- config for 2 monitor X220
      , textOffset = -1
      , iconOffset = -1
      , lowerOnStart = False

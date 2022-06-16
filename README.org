@@ -14,13 +14,13 @@ What is in there:
 + some wallpaper
 + Emacs (Doom)
 
-* TODO [4/10] In order of importance
-1. [X] add a file description, and a script, for every symlink to automate the creation of correct symlink (the one that are there now are just placeholder)
+* TODO [5/10] In order of importance
+1. [X] [TOIMPROVE] add a file description, and a script, for every symlink to automate the creation of correct symlink (need some more test)
 2. [X] Setup rofi to use pywal colorscheme
 3. [ ] Improve xmonad literate config and xmobar config
 4. [ ] Add Doom literate config
 5. [X] Add Install script (partially done, need some test and refiniture)
-6. [ ] Add files to gitignore
+6. [X] Add files to gitignore
 7. [X] Add script to change wallpaper and sync all colorscheme accordingly to pywal, only for Xmonad
 8. [ ] eww widget (notif-center, dashboard, systray (there are some alternative to use with xmobar,  but I didn't really like them (this todo is kinda lispy (but in reverse))))
 9. [ ] Explain why I think that ~awesomeWM~ is better, but is to complicated to setup and that bring me back to XMonad (long story short: "Too much code to write, to much depencies (Bling, Rubato, Lain, ecc... )")

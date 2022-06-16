@@ -230,6 +230,15 @@ myAdditionalKeys = [ -- Basic keybindings
                    , ("M-s d"  , namedScratchpadAction myScratchpad  "dropdown")
                    , ("M-<F12>"  , namedScratchpadAction myScratchpad  "dropdown")
                    , ("M-s h"  , namedScratchpadAction myScratchpad  "sys_monitor")
+
+                    -- XF86 keys
+                   , ("<XF86AudioMute>"       , spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+                   , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%")
+                   , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%")
+                   , ("<XF86MonBrightnessDown>", spawn "brightnessctl set 5%- -q")
+                   , ("<XF86MonBrightnessUp>", spawn "brightnessctl set 5%+ -q")
+                   , ("<Print>", spawn "flameshot gui -p ~/Pictures/Screenshots")
+                   , ("S-<Print>", spawn "flameshot screen -p ~/Pictures/Screenshots")
                    ]
 
 myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -279,6 +288,7 @@ myLogHook = return ()
 myStartupHook = do
     -- spawnOnce "~/.xmonad/scripts/autostart.sh"
     spawnOnce $ "feh --bg-scale " ++ wallpaper
+    spawnOnce $ "~/.xmonad/scripts/check_battery.sh"
     spawnOnce $ "setxkbmap us -option caps:ctrl_modifier"
     spawnOnce $ "xsetroot -cursor_name left_ptr"
     spawnOnce "killall picom" -- kill current picom on each restart

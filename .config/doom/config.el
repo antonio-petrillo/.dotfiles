@@ -235,15 +235,7 @@ _l_ → _L_ → m   _c_ delete      _]_ prev buffer         _,_  W ←
        :desc "transparency" "t" #'nto/toggle-transparency
        :desc "woman" "w" #'woman))
 
-
-;; TODO other toggle:
-;; + toggle light/dark theme
-;; + boh
-
-;; elfeed config
-(after! elfeed
-  (add-hook! 'elfeed-search-mode-hook #'elfeed-update)
-  (setq elfeed-search-filter "@1-month-ago +unread"))
-
-;;(setq rmh-elfeed-org-files '("~/Documents/Org/elfeed.org"))
-;; try elfeed-goodies
+(use-package! org-auto-tangle
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode)
+  :config (setq org-auto-tangle-default t))

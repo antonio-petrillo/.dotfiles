@@ -2,5 +2,7 @@ README.org
 Install.org
 .git
 .gitmodules
+.gitignore
 install
+scripts
 wallpapers
