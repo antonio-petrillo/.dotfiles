@@ -288,7 +288,7 @@ myLogHook = return ()
 myStartupHook = do
     -- spawnOnce "~/.xmonad/scripts/autostart.sh"
     spawnOnce $ "feh --bg-scale " ++ wallpaper
-    spawnOnce $ "~/.xmonad/scripts/check_battery.sh"
+    spawnOnce $ "~/.xmonad/scripts/battery_notification.sh"
     spawnOnce $ "setxkbmap us -option caps:ctrl_modifier"
     spawnOnce $ "xsetroot -cursor_name left_ptr"
     spawnOnce "killall picom" -- kill current picom on each restart
