@@ -4,7 +4,7 @@
 #
 
 # kill previous instance of the script
-ps aux | grep "check_battery.sh" | awk '{print $2}' | xargs kill -p
+ps aux | grep "check_battery.sh" | awk '{print $2}' | xargs kill -p 2> /dev/null
 
 under_30_flag="/tmp/battery_under_30"
 under_15_flag="/tmp/battery_under_15"
