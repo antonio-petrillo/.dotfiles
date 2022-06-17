@@ -52,7 +52,10 @@ import XMonad.Actions.GridSelect
 
 myTerminal         = "alacritty"
 myFallbackTerminal = "cool-retro-term"
-myLauncher         = "rofi -modi run,drun -show drun -show-icons"
+myLauncher         = "rofi -modi run,drun,window -show drun -show-icons"
+myEmojiSelector    = "rofi -modi emoji -show emoji -show-icons"
+myCalculator       = "rofi -modi calc -show calc -show-icons"
+myFileSelector     = "rofi -modi filebrowser -show filebrowser"
 myFileManager      = "nemo"
 myBrowser          = "google-chrome-stable"
 myEditor           = "emacsclient -c -a \"emacs\""
@@ -210,6 +213,11 @@ myAdditionalKeys = [ -- Basic keybindings
                    , ("M-S-x"       , io (exitWith ExitSuccess))
                    , ("M-x"         , spawn $ "killall xmobar; ~/.xmonad/scripts/xmobar_pywal_color_sync.sh; xmonad --recompile; xmonad --restart")
                    , ("M-<Esc>"     , spawn $ "xkill")
+
+                   -- launcher [TOIMPROVE]
+                   , ("M-i e"         , spawn myEmojiSelector)
+                   , ("M-i c"         , spawn myCalculator)
+                   , ("M-i f"         , spawn myFileSelector)
 
                    -- Layout shortcut
                    , ("M-S-l 0"     , sendMessage $ JumpToLayout "tall")

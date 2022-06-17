@@ -6,8 +6,8 @@ Config {
                          , "xft:Font Awesome 5 Brands:pixelsize=9:antialias=true:hinting=true"]
      , borderColor = "black"
      , border = TopB
-     , bgColor  = "#031A1D"
-     , fgColor  = "#96b9b2"
+     , bgColor  = "#0b0d0e"
+     , fgColor  = "#c09f9a"
      , alpha = 255
      , position = Static {xpos = 1920, ypos = 0, width = 1920, height = 32} -- config for 2 monitor
      --, position = Static {xpos = 1366, ypos = 0, width = 1366, height = 32} -- config for 2 monitor X220
@@ -19,22 +19,22 @@ Config {
      , hideOnStart = False
      , allDesktops = True
      , overrideRedirect = True
-     , commands = [ Run Cpu ["-t", "<fc=#96b9b2><bar></fc>",
+     , commands = [ Run Cpu ["-t", "<fc=#c09f9a><bar></fc>",
                   "-f", ":",
                   "-H", "75",
                   "-L", "25",
-                  "-h", "#164947",
-                  "-n", "#27524D",
-                  "-l", "#2B5E5E" ] 10
-                  ,Run Memory  [ "-t", "<fc=#96b9b2><usedbar></fc>",
+                  "-h", "#293642",
+                  "-n", "#39504D",
+                  "-l", "#385B5A" ] 10
+                  ,Run Memory  [ "-t", "<fc=#c09f9a><usedbar></fc>",
                       "-f", ":",
                       "-H", "75",
                       "-L", "25",
-                      "-h", "#164947",
-                      "-n", "#27524D",
-                      "-l", "#2B5E5E" ] 10
+                      "-h", "#293642",
+                      "-n", "#39504D",
+                      "-l", "#385B5A" ] 10
                   , Run BatteryP ["BAT0"]
-                                ["-t", "<fc=#96b9b2><fn=2>\xf581 </fn></fc>: <left>%", "-L", "10", "-H", "80", "-p", "3",
+                                ["-t", "<fc=#c09f9a><fn=2>\xf581 </fn></fc>: <left>%", "-L", "10", "-H", "80", "-p", "3",
                                  "--", "-O", "", "-i", "", "-L", "-15", "-H", "-5",
                                  "-l", "red", "-m", "blue", "-h", "green" ] 600
                   , Run Date "%a %b %d, %H:%M" "date" 10
@@ -42,5 +42,5 @@ Config {
                   ]
      , sepChar = "%"
      , alignSep = "}{"
-     , template = "<fc=#2B5E5E><fn=2> </fn></fc> <fc=#2B5E5E>|</fc> %UnsafeStdinReader% }{ Cpu: %cpu% Mem: %memory% %date% "
+     , template = "<fc=#385B5A><fn=2> </fn></fc> <fc=#385B5A>|</fc> %UnsafeStdinReader% }{ Cpu: %cpu% Mem: %memory% %date% "
      }
