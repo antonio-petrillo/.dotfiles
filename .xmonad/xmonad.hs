@@ -162,7 +162,7 @@ myScratchpad =[ NS "dropdown"     spawnTerm              findTerm             ma
           spawnHtop              = myTerminal ++ " -t htop_term -e htop"
           findHtop               = title =? "htop_term"
           manageHtop             = doCenterFloat
-          spawnTerm              = myTerminal ++ " -t dropdown" -- -e tmux "
+          spawnTerm              = myTerminal ++ " -t dropdown" -- ++ " -e tmux "
           findTerm               = title =? "dropdown"
           manageTerm             = doCenterFloat
           officeLaunchCalculator = "qalculate-gtk"
@@ -294,15 +294,15 @@ myManageHook = composeAll . concat $
 myLogHook = return ()
 
 myStartupHook = do
-    -- spawnOnce "~/.xmonad/scripts/autostart.sh"
-    spawnOnce $ "feh --bg-scale " ++ wallpaper
-    spawnOnce $ "~/.xmonad/scripts/battery_notification.sh"
-    spawnOnce $ "setxkbmap us -option caps:ctrl_modifier"
-    spawnOnce $ "xsetroot -cursor_name left_ptr"
-    spawnOnce "killall picom" -- kill current picom on each restart
-    spawnOnce $ "picom --configuration ~/.dotfiles/.xmonad/picom.conf"
-    spawnOnce $ "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 && eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)"
-    spawn "emacs --daemon"
+    spawnOnce "~/.xmonad/scripts/autostart.sh"
+    -- spawnOnce $ "feh --bg-scale " ++ wallpaper
+    -- spawnOnce $ "~/.xmonad/scripts/battery_notification.sh"
+    -- spawnOnce $ "setxkbmap us -option caps:ctrl_modifier"
+    -- spawnOnce $ "xsetroot -cursor_name left_ptr"
+    -- spawnOnce "killall picom" -- kill current picom on each restart
+    -- spawnOnce $ "picom --configuration ~/.dotfiles/.xmonad/picom.conf"
+    -- spawnOnce $ "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 && eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)"
+    -- spawn "emacs --daemon"
     setWMName "LG3D"
 
 myConfig = defaultConfig {

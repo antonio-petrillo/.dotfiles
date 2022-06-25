@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+hdmi_connected=$(xrandr | grep "^HDMI" | awk '{print $2}')
+
+if [[ "$hdmi_connected" == "connected" ]]
+then
+    xrandr --output eDP --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-A-0 --mode 1920x1080 --pos 0x0 --rotate normal
+fi
