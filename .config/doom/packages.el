@@ -55,7 +55,7 @@
 (package! gruber-darker-theme)
 (package! spacemacs-theme)
 (package! org-appear)
+(package! org-auto-tangle)
 (package! org-modern
           :pin "0b7fc3742000431390a2de6be159f547dc4bd436"
           :recipe (:host github :repo "minad/org-modern"))
-(package! org-auto-tangle)

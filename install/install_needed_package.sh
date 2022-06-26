@@ -24,7 +24,7 @@ cowfortune \
 discord \
 dmenu \
 dunst \
-emacs \
+emacs-nativecomp \
 evince \
 eww-git \
 exa \

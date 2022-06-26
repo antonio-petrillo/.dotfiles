@@ -9,7 +9,7 @@
 ###     Stop previous running script        ####
 ################################################
 
-ps aux | grep "battery_notification.sh" | grep -v "grep" | grep -v "$$"| awk '{print $2}' | xargs kill
+ps aux | grep "battery_notification.sh" | grep -v "grep" | grep -v "$$"| awk '{print $2}' | xargs kill 2> /dev/null
 
 ##########################################
 ###     Variable customization        ####
@@ -25,23 +25,22 @@ under_15_title="Houston we have a BIG problem"
 under_15_message="Battery is under 15%"
 
 # image
-assets_folder="$HOME/.xmonad/assets/"
+assets_folder="$HOME/.xmonad/assets"
 under_30_image="spaceman.jpg"
 under_15_image="ghost.png"
 
 # sleep time
-timesleep=60
+timesleep=3
 
 ##########################################
-
-charge_level=$(acpi | grep "^$battery" | awk -F, '{print $2}' | sed 's/%//')
-is_charging=$(acpi | grep "^$battery" | grep -o "[a-zA-Z]*harging")
 
 under_30_flag=/tmp/under_30_flag
 under_15_flag=/tmp/under_15_flag
 
 while true
 do
+    charge_level=$(acpi | grep "^$battery" | awk -F, '{print $2}' | sed 's/%//')
+    is_charging=$(acpi | grep "^$battery" | grep -o "[a-zA-Z]*harging")
     case $is_charging in
         "Charging")
             if [ -f $under_30_flag ]
@@ -59,14 +58,14 @@ do
                 if [ ! -f $under_30_flag ]
                 then
                     touch $under_30_flag
-                    notify-send -e -u normal "$under_30_title" "$under_30_message" -i "$assets_folder$under_30_image"
+                    notify-send -e -u normal "$under_30_title" "$under_30_message" -i "$assets_folder/$under_30_image"
                 fi
             elif [ $charge_level -le 15 ]
             then
                 if [ ! -f $under_15_flag ]
                 then
                     touch $under_15_flag
-                    notify-send -e -u critical "$under_15_title" "$under_15_message" -i "$assets_folder$under_15_image"
+                    notify-send -e -u critical "$under_15_title" "$under_15_message" -i "$assets_folder/$under_15_image"
                 fi
             fi
             ;;

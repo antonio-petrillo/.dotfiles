@@ -16,7 +16,7 @@ setxkbmap us -option caps:ctrl_modifier
 
 # Launch compositor
 killall picom 2>/dev/null
-picom --configuration "$HOME/.xmonad/other_config/picom.conf"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 && eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)
+picom --configuration "$HOME/.xmonad/other_config/picom.conf"
 
 # gnome-keyring
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 && eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)
